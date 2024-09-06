@@ -14,18 +14,24 @@ title (string, mandatory): This field should store the job title.
 description (string, mandatory): This field is for the job description.
 company (string, mandatory): Use this field to store the name of the company posting the job.
 salary (number, mandatory): Store the job's salary in this field.
-applicants (ObjectID reference to 'User', mandatory): This field links to applicants as references in the 'User' collection. 2. Application Schema:
+applicants (ObjectID reference to 'User', mandatory): This field links to applicants as references in the 'User' collection. 
+
+2. Application Schema:
 
 b. Create a schema for recording job applications in the same "src/features/jobs/schema" directory.
 Fields:
 jobId (ObjectID reference to 'Job', mandatory): Store the job the applicant is applying for.
-userId (ObjectID reference to 'User', mandatory): Identify the applicant. 3. Like Schema:
+userId (ObjectID reference to 'User', mandatory): Identify the applicant. 
+
+3. Like Schema:
 
 c. Create a schema to record likes, allowing users to express interest in both jobs and user profiles.
 Fields:
 user (mongoose ObjectId, mandatory): Reference 'User' to identify the user who likes.
 likeable (mongoose ObjectId, mandatory): Reference the item being liked.
-on_model (string, mandatory): Specify whether the like is for a 'User' or a 'Job'. 4. Controllers for Job Feature:
+on_model (string, mandatory): Specify whether the like is for a 'User' or a 'Job'. 
+
+4. Controllers for Job Feature:
 
 2. Job Controllers:
    a. Implement the following controllers for the job feature and their corresponding repository functions or create custom functions:

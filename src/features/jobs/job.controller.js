@@ -6,22 +6,28 @@ import { applyJobRepo, createNewJob, findJobRepo } from "./job.repository.js";
 
 export const postJob = async (req, res, next) => {
   // Enhance the functionality of this controller to ensure that only users of the 'recruiter' type can post a new job.
-
-  try {
-    const resp = await createNewJob(req.body);
-    if (resp) {
-      res.status(201).json({
-        success: true,
-        msg: "job posted successfully with ",
-        job_description: resp,
-      });
-    } else {
-      res.status(400).json({ success: false, msg: "bad request" });
+  if(req.user.type == 'recruiter'){
+    try {
+        const resp = await createNewJob(req.body);
+        if (resp) {
+          res.status(201).json({
+            success: true,
+            msg: "job posted successfully with ",
+            job_description: resp,
+          });
+        } else {
+          res.status(400).json({ success: false, msg: "bad request" });
+        }
+      } catch (error) {
+        next(new customErrorHandler(400, error));
     }
-  } catch (error) {
-    next(new customErrorHandler(400, error));
+  }else{
+    res.status(400).json({ success: false, msg: "Only recuiter is allowed to post a job" });
   }
+  
 };
+
+
 export const applyJob = async (req, res, next) => {
   const job_id = req.params.id;
   const user_id = req.user._id;

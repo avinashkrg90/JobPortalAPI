@@ -21,11 +21,12 @@ export const jobSchema = new mongoose.Schema({
     type:Number,
     required:true
   },
-  applicants:{
-    type:mongoose.SchemaType.ObjectID,
-    required:true,
-    ref:'User'
-  }
+  applicants:[
+      {
+        type:mongoose.Schema.Types.ObjectID,
+        ref:'User'
+      }
+  ]
 });
 
 
